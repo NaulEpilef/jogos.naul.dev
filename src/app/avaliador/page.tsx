@@ -19,14 +19,14 @@ export default function Home() {
 
   useEffect(() => getDocs(), []);
 
-  // useEffect(() => {
-  //   console.log(doc);
-  // }, [doc]);
-
   const getDocs = () => {
     api.get("/documents/random")
     .then((res) => {
       const data = res.data as IDocuments;
+      if (data.id?.dateBirth != undefined) {
+        data.id.dateBirth = moment(data.id?.dateBirth);
+      }
+
       if (data.id?.dateValidate != undefined) {
         data.id.dateValidate = moment(data.id?.dateValidate);
       }

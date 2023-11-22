@@ -9,7 +9,7 @@ export interface IDocuments {
 export interface IIdDocument {
 	name: string;
 	cpf: string;
-	dateBirth?: Moment;
+	dateBirth: Moment;
 	dateValidate: Moment;
 }
 
