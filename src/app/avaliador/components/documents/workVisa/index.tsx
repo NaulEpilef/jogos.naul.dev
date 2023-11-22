@@ -1,11 +1,11 @@
-import { IWorkVisaDocument } from '@/app/avaliador/interfaces/documents.interface'
+import { IWorkVisaDocument } from '@/app/avaliador/interfaces/documents.interfaces'
 
 import styles from './id.module.css'
 
 export default function WorkVisa({ name, dateValidate, cnpj }: IWorkVisaDocument) {
   return (
     <div className={styles.paper}>
-      <h1>Cartão CNPJ</h1>
+      <h1>Visto de trabalho</h1>
       <div>
         <span>Name:</span>
         <span>{name}</span>
