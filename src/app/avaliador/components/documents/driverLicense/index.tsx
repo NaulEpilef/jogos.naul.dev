@@ -2,7 +2,7 @@ import { IDriverLicenseDocument } from '@/app/avaliador/interfaces/documents.int
 
 import styles from './id.module.css'
 
-export default function DriverLicense({ name, dateValidate, cnh }: IDriverLicenseDocument) {
+export default function DriverLicense({ name, dateValidate, cpf }: IDriverLicenseDocument) {
   return (
     <div className={styles.paper}>
       <h1>Habilitação</h1>
@@ -15,8 +15,8 @@ export default function DriverLicense({ name, dateValidate, cnh }: IDriverLicens
         <span>{dateValidate.format("DD/MM/YYYY")}</span>
       </div>
       <div>
-        <span>CNH:</span>
-        <span>{cnh}</span>
+        <span>CPF:</span>
+        <span>{cpf}</span>
       </div>
     </div>
   )
