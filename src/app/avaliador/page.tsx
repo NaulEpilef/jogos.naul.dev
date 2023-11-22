@@ -73,13 +73,13 @@ export default function Home() {
             dateValidate={allDocs[current].driverLicense?.dateValidate || moment()}
             cnh={allDocs[current].driverLicense?.cnh || ''} />
         }
-        {
+        {/* {
           allDocs[current] &&
           <WorkVisa
             name={allDocs[current].workVisa?.name || ''}
             dateValidate={allDocs[current].workVisa?.dateValidate || moment()}
             cnpj={allDocs[current].workVisa?.cnpj || ''} />
-        }
+        } */}
       </div>
       <button onClick={handleNext}>Próximo</button>
     </main>
