@@ -1,4 +1,4 @@
-import { IDriverLicenseDocument } from '@/app/avaliador/interfaces/documents.interface'
+import { IDriverLicenseDocument } from '@/app/avaliador/interfaces/documents.interfaces'
 
 import styles from './id.module.css'
 
