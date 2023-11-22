@@ -15,37 +15,32 @@ const randomNumberInRange = (min: number, max: number): number => {
 }
 
 export default function Home() {
-  const [allDocs, setAllDocs] = useState<IDocuments[]>([]);
-  const [current, setCurrent] = useState<number>(0);
+  const [doc, setDoc] = useState<IDocuments>();
 
-  useEffect(() => {
-    api.get("/documents/random")
-    .then((res) => {
-      const data = res.data as IDocuments[];
-      const docs: IDocuments[] = data.map(d => {
-        if (d.id?.dateValidate != undefined) {
-          d.id.dateValidate = moment(d.id?.dateValidate);
-        }
-        
-        if (d.driverLicense?.dateValidate != undefined) {
-          d.driverLicense.dateValidate = moment(d.driverLicense?.dateValidate);
-        }
-
-        return d;
-      });
-
-      setAllDocs(docs);
-    });
-  }, []);
+  useEffect(() => getDocs(), []);
 
   // useEffect(() => {
-  //   console.log(allDocs);
-  // }, [allDocs]);
+  //   console.log(doc);
+  // }, [doc]);
+
+  const getDocs = () => {
+    api.get("/documents/random")
+    .then((res) => {
+      const data = res.data as IDocuments;
+      if (data.id?.dateValidate != undefined) {
+        data.id.dateValidate = moment(data.id?.dateValidate);
+      }
+      
+      if (data.driverLicense?.dateValidate != undefined) {
+        data.driverLicense.dateValidate = moment(data.driverLicense?.dateValidate);
+      }
+
+      setDoc(data);
+    });
+  }
 
   const handleNext = () => {
-    if (current < allDocs.length - 1) {
-      setCurrent(current + 1);
-    }
+    getDocs();
   }
 
   return (
@@ -55,26 +50,26 @@ export default function Home() {
       </div>
       <div className={styles.drag_documents_area}>
         {
-          allDocs[current] &&
+          doc &&
           <IdDocument
-            name={allDocs[current].id?.name || ''}
-            cpf={allDocs[current].id?.cpf || ''}
-            dateBirth={allDocs[current].id?.dateBirth || moment()}
-            dateValidate={allDocs[current].id?.dateValidate || moment()} />
+            name={doc.id?.name || ''}
+            cpf={doc.id?.cpf || ''}
+            dateBirth={doc.id?.dateBirth || moment()}
+            dateValidate={doc.id?.dateValidate || moment()} />
         }
         {
-          allDocs[current] &&
+          doc &&
           <DriverLicense
-            name={allDocs[current].driverLicense?.name || ''}
-            dateValidate={allDocs[current].driverLicense?.dateValidate || moment()}
-            cpf={allDocs[current].driverLicense?.cpf || ''} />
+            name={doc.driverLicense?.name || ''}
+            dateValidate={doc.driverLicense?.dateValidate || moment()}
+            cpf={doc.driverLicense?.cpf || ''} />
         }
         {/* {
-          allDocs[current] &&
+          doc &&
           <WorkVisa
-            name={allDocs[current].workVisa?.name || ''}
-            dateValidate={allDocs[current].workVisa?.dateValidate || moment()}
-            cnpj={allDocs[current].workVisa?.cnpj || ''} />
+            name={doc.workVisa?.name || ''}
+            dateValidate={doc.workVisa?.dateValidate || moment()}
+            cnpj={doc.workVisa?.cnpj || ''} />
         } */}
       </div>
       <button onClick={handleNext}>Próximo</button>
