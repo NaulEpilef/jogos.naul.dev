@@ -8,6 +8,8 @@ import { IDocuments } from './interfaces/documents.interface';
 import DriverLicense from './components/documents/driverLicense';
 import WorkVisa from './components/documents/workVisa';
 
+import api from '@/app/config/api';
+
 const randomNumberInRange = (min: number, max: number): number => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -17,35 +19,32 @@ export default function Home() {
   const [current, setCurrent] = useState<number>(0);
 
   useEffect(() => {
-    const names = ["Naul", "Elder", "Fan", "Jason"];
-    const d = [] as IDocuments[];
-    names.forEach(n => {
-      const docs = {
-        id: {
-          cpf: crypto.randomUUID(),
-          name: n,
-          dateValidate: moment().locale("pt-br").add(randomNumberInRange(-6, 6), 'd'),
-        },
-        driverLicense: {
-          cnh: crypto.randomUUID(),
-          name: n,
-          dateValidate: moment().locale("pt-br").add(randomNumberInRange(-6, 6), 'd'),
-        },
-        workVisa: {
-          cnpj: crypto.randomUUID(),
-          name: n,
-          dateValidate: moment().locale("pt-br").add(randomNumberInRange(-6, 6), 'd'),
+    api.get("/documents/random")
+    .then((res) => {
+      const data = res.data as IDocuments[];
+      const docs: IDocuments[] = data.map(d => {
+        if (d.id?.dateValidate != undefined) {
+          d.id.dateValidate = moment(d.id?.dateValidate);
         }
-      } as IDocuments;
-      d.push(docs);
-    });
+        
+        if (d.driverLicense?.dateValidate != undefined) {
+          d.driverLicense.dateValidate = moment(d.driverLicense?.dateValidate);
+        }
+        
+        if (d.workVisa?.dateValidate != undefined) {
+          d.workVisa.dateValidate = moment(d.workVisa?.dateValidate);
+        }
 
-    setAllDocs(d);
+        return d;
+      });
+      
+      setAllDocs(docs);
+    });
   }, []);
 
-  useEffect(() => {
-    console.log(allDocs);
-  }, [allDocs]);
+  // useEffect(() => {
+  //   console.log(allDocs);
+  // }, [allDocs]);
 
   const handleNext = () => {
     if (current < allDocs.length - 1) {
