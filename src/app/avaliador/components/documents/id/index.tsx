@@ -1,4 +1,4 @@
-import { IIdDocument } from '@/app/avaliador/interfaces/documents.interface'
+import { IIdDocument } from '@/app/avaliador/interfaces/documents.interfaces'
 
 import styles from './id.module.css'
 

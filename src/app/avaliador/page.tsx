@@ -4,7 +4,7 @@ import styles from './page.module.css';
 import IdDocument from './components/documents/id';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import { IDocuments } from './interfaces/documents.interface';
+import { IDocuments } from './interfaces/documents.interfaces';
 import DriverLicense from './components/documents/driverLicense';
 import WorkVisa from './components/documents/workVisa';
 
@@ -30,14 +30,10 @@ export default function Home() {
         if (d.driverLicense?.dateValidate != undefined) {
           d.driverLicense.dateValidate = moment(d.driverLicense?.dateValidate);
         }
-        
-        if (d.workVisa?.dateValidate != undefined) {
-          d.workVisa.dateValidate = moment(d.workVisa?.dateValidate);
-        }
 
         return d;
       });
-      
+
       setAllDocs(docs);
     });
   }, []);
@@ -62,23 +58,24 @@ export default function Home() {
           allDocs[current] &&
           <IdDocument
             name={allDocs[current].id?.name || ''}
-            dateValidate={allDocs[current].id?.dateValidate || moment()}
-            cpf={allDocs[current].id?.cpf || ''} />
+            cpf={allDocs[current].id?.cpf || ''}
+            dateBirth={allDocs[current].id?.dateBirth || moment()}
+            dateValidate={allDocs[current].id?.dateValidate || moment()} />
         }
         {
           allDocs[current] &&
           <DriverLicense
             name={allDocs[current].driverLicense?.name || ''}
             dateValidate={allDocs[current].driverLicense?.dateValidate || moment()}
-            cnh={allDocs[current].driverLicense?.cnh || ''} />
+            cpf={allDocs[current].driverLicense?.cpf || ''} />
         }
-        {
+        {/* {
           allDocs[current] &&
           <WorkVisa
             name={allDocs[current].workVisa?.name || ''}
             dateValidate={allDocs[current].workVisa?.dateValidate || moment()}
             cnpj={allDocs[current].workVisa?.cnpj || ''} />
-        }
+        } */}
       </div>
       <button onClick={handleNext}>Próximo</button>
     </main>
