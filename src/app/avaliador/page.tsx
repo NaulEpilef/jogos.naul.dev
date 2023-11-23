@@ -15,7 +15,7 @@ const randomNumberInRange = (min: number, max: number): number => {
 }
 
 export default function Home() {
-  const [doc, setDoc] = useState<IDocuments>();
+  const [doc, setDoc] = useState<IDocuments>({});
 
   useEffect(() => getDocs(), []);
 
@@ -50,7 +50,7 @@ export default function Home() {
       </div>
       <div className={styles.drag_documents_area}>
         {
-          doc &&
+          doc.id &&
           <IdDocument
             name={doc.id?.name || ''}
             cpf={doc.id?.cpf || ''}
@@ -58,7 +58,7 @@ export default function Home() {
             dateValidate={doc.id?.dateValidate || moment()} />
         }
         {
-          doc &&
+          doc.driverLicense &&
           <DriverLicense
             name={doc.driverLicense?.name || ''}
             dateValidate={doc.driverLicense?.dateValidate || moment()}
