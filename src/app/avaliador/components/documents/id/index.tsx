@@ -1,31 +1,32 @@
 import { IIdDocument } from '@/app/avaliador/interfaces/documents.interfaces'
 
 import styles from './id.module.css'
+import { FieldBodyStyled, FieldStyled, FieldTitleStyled, PaperStyled } from '../../styled/documents/DocumentStyled'
 
 export default function Id({ name, dateBirth, dateValidate, cpf }: IIdDocument) {
   return (
-    <div className={styles.paper}>
+    <PaperStyled>
       <h1>Identidade</h1>
       <div className={styles.inLine}>
-        <div className={styles.field}>
-          <span className={styles.fieldTitle}>Nome</span>
-          <span className={styles.fieldBody}>{name}</span>
-        </div>
-        <div className={styles.field}>
-          <span className={styles.fieldTitle}>CPF</span>
-          <span className={styles.fieldBody}>{cpf}</span>
-        </div>
+        <FieldStyled>
+          <FieldTitleStyled>Nome</FieldTitleStyled>
+          <FieldBodyStyled>{name}</FieldBodyStyled>
+        </FieldStyled>
+        <FieldStyled>
+          <FieldTitleStyled>CPF</FieldTitleStyled>
+          <FieldBodyStyled>{cpf}</FieldBodyStyled>
+        </FieldStyled>
       </div>
       <div className={styles.inLine}>
-        <div className={styles.field}>
-          <span className={styles.fieldTitle}>Validade</span>
-          <span className={styles.fieldBody}>{dateValidate.format("DD/MM/YYYY")}</span>
-        </div>
-        <div className={styles.field}>
-          <span className={styles.fieldTitle}>Nascimento</span>
-          <span className={styles.fieldBody}>{dateBirth.format("DD/MM/YYYY")}</span>
-        </div>
+        <FieldStyled>
+          <FieldTitleStyled>Validade</FieldTitleStyled>
+          <FieldBodyStyled>{dateValidate.format("DD/MM/YYYY")}</FieldBodyStyled>
+        </FieldStyled>
+        <FieldStyled>
+          <FieldTitleStyled>Nascimento</FieldTitleStyled>
+          <FieldBodyStyled>{dateBirth.format("DD/MM/YYYY")}</FieldBodyStyled>
+        </FieldStyled>
       </div>
-    </div>
+    </PaperStyled>
   )
 }
