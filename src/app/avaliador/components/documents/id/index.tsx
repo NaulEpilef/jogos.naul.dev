@@ -5,24 +5,24 @@ import { FieldBodyStyled, FieldStyled, FieldTitleStyled, PaperStyled } from '../
 
 export default function Id({ name, dateBirth, dateValidate, cpf }: IIdDocument) {
   return (
-    <PaperStyled>
+    <PaperStyled bgcolor='brown' height='15em' width='30em'>
       <h1>Identidade</h1>
       <div className={styles.inLine}>
-        <FieldStyled>
+        <FieldStyled amountInLine={2}>
           <FieldTitleStyled>Nome</FieldTitleStyled>
           <FieldBodyStyled>{name}</FieldBodyStyled>
         </FieldStyled>
-        <FieldStyled>
+        <FieldStyled amountInLine={2}>
           <FieldTitleStyled>CPF</FieldTitleStyled>
           <FieldBodyStyled>{cpf}</FieldBodyStyled>
         </FieldStyled>
       </div>
       <div className={styles.inLine}>
-        <FieldStyled>
+        <FieldStyled amountInLine={2}>
           <FieldTitleStyled>Validade</FieldTitleStyled>
           <FieldBodyStyled>{dateValidate.format("DD/MM/YYYY")}</FieldBodyStyled>
         </FieldStyled>
-        <FieldStyled>
+        <FieldStyled amountInLine={2}>
           <FieldTitleStyled>Nascimento</FieldTitleStyled>
           <FieldBodyStyled>{dateBirth.format("DD/MM/YYYY")}</FieldBodyStyled>
         </FieldStyled>

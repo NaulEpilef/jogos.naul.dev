@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-const PaperStyled = styled.div`
-  background-color: brown;
-  height: 15em;
-  width: 30em;
+const PaperStyled = styled.div<{
+  bgcolor: string;
+  height: string;
+  width: string;
+}>`
+  background-color: ${props => (props.bgcolor || 'brown')};
+  height: ${props => (props.height || '15em')};
+  width: ${props => (props.width || '30em')};
 
   background-image: linear-gradient(45deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
 
@@ -20,11 +24,13 @@ const PaperStyled = styled.div`
   }
 `;
 
-const FieldStyled = styled.div`
+const FieldStyled = styled.div<{
+  amountInLine: number;
+}>`
   display: flex;
   flex-direction: column;
   margin: 0.6em;
-  width: 90%;
+  width: ${props => (90/props.amountInLine) + '%' };
 `;
 
 const FieldTitleStyled = styled.span`
