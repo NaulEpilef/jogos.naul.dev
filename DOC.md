@@ -8,3 +8,9 @@
 - Nome
 - CPF
 - Data de validade
+
+# Coisas que não podem faltar
+
+- Textura
+- Som
+- Personagem
